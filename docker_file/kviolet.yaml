@@ -1,0 +1,8 @@
+version: '3'
+services:
+  dev:
+    image: kviolet:latest
+    volumes:
+      - /home/mk/.ssh:/home/developer/.ssh
+      - /home/mk/.gitconfig:/home/developer/.gitconfig
+      - ../:/home/developer/workspace
