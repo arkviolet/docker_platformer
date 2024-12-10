@@ -3,6 +3,8 @@ services:
   dev:
     image: kviolet:latest
     volumes:
+      - /opt/rk3568:/opt/rk3568
+      - /opt/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf:/opt/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf
       - /home/mk/.ssh:/home/developer/.ssh
       - /home/mk/.gitconfig:/home/developer/.gitconfig
       - ../:/home/developer/workspace

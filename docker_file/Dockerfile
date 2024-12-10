@@ -15,9 +15,10 @@ COPY etc /etc/
 #RUN dpkg --add-architecture arm64
 #RUN dpkg --add-architecture armhf
 
-
 RUN apt-get update && \
     apt-get install -y \
+    sudo \
+    dos2unix \
     build-essential gcc g++ automake autoconf \
     wget curl vim ack git gitk \
     pulseaudio libpulse-dev \
@@ -31,8 +32,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tclsh
 RUN apt-get install -y \
     gcc-aarch64-linux-gnu g++-aarch64-linux-gnu 
 
-#ENV http_proxy=http://172.29.16.1:10809
-#ENV https_proxy=http://172.29.16.1:10809
+ENV http_proxy=http://172.29.16.1:10809
+ENV https_proxy=http://172.29.16.1:10809
 
 RUN curl https://cmake.org/files/v3.24/cmake-3.24.3-linux-x86_64.sh -O
 RUN bash ./cmake-3.24.3-linux-x86_64.sh --skip-license --prefix=/usr
