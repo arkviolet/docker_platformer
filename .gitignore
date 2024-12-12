@@ -1,24 +1,23 @@
-#
-# clion
-#
 .idea
 cmake-build-debug
 cmake-build-release
 
-#
-# build
-#
 build*
 build_linux
 build_androd
 build_rk3308
 
-#
-# cache
-#
+
 toolkit
 packages
 toolkit_3rd
 toolkit_3rd*
 toolkit_3rd_cross_rk3568
 toolkit_3rd_cross_h3_r258
+
+
+procps*
+ncurses*
+sysstat*
+minicom*
+static-binaries*
