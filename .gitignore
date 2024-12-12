@@ -10,6 +10,7 @@ build_rk3308
 
 toolkit
 packages
+software
 toolkit_3rd
 toolkit_3rd*
 toolkit_3rd_cross_rk3568

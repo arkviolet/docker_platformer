@@ -19,6 +19,7 @@ RUN apt-get update && \
     apt-get install -y \
     sudo \
     dos2unix \
+    libtool autopoint pkgconf \
     build-essential gcc g++ automake autoconf \
     wget curl vim ack git gitk \
     pulseaudio libpulse-dev \
