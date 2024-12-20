@@ -25,7 +25,7 @@ meson --cross-file gst_rk3568.txt build_rk3568 \
     -Dtests=disabled \
     -Dexamples=disabled \
     --reconfigure \
-    --prefix=$INSTALL_PREFIX_CROSS_LINUX/gstreamer/rk3568
+    --prefix=$INSTALL_PREFIX_CROSS_LINUX/rk3568/gstreamer
 
 ninja -C build_rk3568
 

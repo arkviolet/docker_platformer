@@ -4,15 +4,15 @@ cpu_family = 'aarch64'
 cpu = 'aarch64'
 endian = 'little'
 [properties]
-pkg_config_libdir = ['/opt/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot/usr/lib/pkgconfig']
-sys_root = '/opt/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot'
+pkg_config_libdir = ['/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot/usr/lib/pkgconfig']
+sys_root = '/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot'
 
-c_args = ['--sysroot=/opt/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot']
-cpp_args = ['--sysroot=/opt/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot']
+c_args = ['--sysroot=/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot']
+cpp_args = ['--sysroot=/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/aarch64-buildroot-linux-gnu/sysroot']
 
 [binaries]
-c = '/opt/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-gcc'
-cpp = '/opt/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-g++'
-ar = '/opt/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-gcc-ar'
-strip = '/opt/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-strip'
-pkgconfig = '/opt/rk3568/aarch64-linux-gcc-v12.3/bin/pkg-config'
+c = '/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-gcc'
+cpp = '/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-g++'
+ar = '/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-gcc-ar'
+strip = '/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/bin/aarch64-buildroot-linux-gnu-strip'
+pkgconfig = '/opt/sdk/rk3568/aarch64-linux-gcc-v12.3/bin/pkg-config'
