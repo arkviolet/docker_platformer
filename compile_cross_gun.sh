@@ -13,11 +13,11 @@ mkdir -vp $PACKAGE_COMPILE_DIR
 mkdir -vp $INSTALL_PREFIX_CROSS_LINUX
 
 ##########################################################################################
-# gdb
-# Rockchip rk3568
-source /opt/workspace/Rockchip/rk3568/aarch64-linux-gcc-v12.3/environment-setup
-export "CONFIGURE_FLAGS=--target=aarch64-buildroot-linux-gnu --host=aarch64-buildroot-linux-gnu --build=x86_64-pc-linux-gnu"
+# rk3568
+PLATFORM=rk3568
+source $sourcePath/linux_crosss_env/environment-setup.rk3568.sh
 
+# gdb
 cd $PACKAGE_COMPILE_DIR
 
 wget http://mirrors.ustc.edu.cn/gnu/gmp/gmp-6.1.2.tar.xz
@@ -25,10 +25,10 @@ wget http://mirrors.ustc.edu.cn/gnu/gmp/gmp-6.1.2.tar.xz
 tar -xvf gmp-6.1.2.tar.xz && cd gmp-6.1.2
 
 ./configure $CONFIGURE_FLAGS \
-		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX//gun/etc \
-		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX//gun/var
+		--prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/etc \
+		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/var
 
 make -j8 && make install
 
@@ -43,11 +43,11 @@ tar -xvf mpfr-4.0.1.tar.gz && cd mpfr-4.0.1/
 ./configure $CONFIGURE_FLAGS \
 		--enable-thread-safe \
 		--enable-warnings \
-		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX/gun/etc \
-		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/gun/var
+		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/etc \
+		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/var
 
 make -j8 && make install
 
@@ -60,12 +60,12 @@ wget http://mirrors.ustc.edu.cn/gnu/mpc/mpc-1.1.0.tar.gz
 tar -xvf mpc-1.1.0.tar.gz && cd mpc-1.1.0/
 
 ./configure $CONFIGURE_FLAGS \
-		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX/gun/etc \
-		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/gun/var
+		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/etc \
+		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/var
 
 make -j8 && make install
 
@@ -78,9 +78,9 @@ wget http://mirrors.ustc.edu.cn/gnu/gdb/gdb-8.1.tar.gz
 tar -xvf gdb-8.1.tar.gz && cd gdb-8.1/
 
 ./configure $CONFIGURE_FLAGS \
-		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-mpc=$INSTALL_PREFIX_CROSS_LINUX/gun \
+		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-mpc=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
 		--enable-host-shared \
 		--enable-vtable-verify \
 		--enable-lto \
@@ -88,20 +88,22 @@ tar -xvf gdb-8.1.tar.gz && cd gdb-8.1/
 		--enable-libada \
 		--program-suffix=8.1 \
 		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX/gun/etc \
-		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/gun/var
+		--exec-prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--sysconfdir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/etc \
+		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun/var
 
 sed -i '179,181d' gdb/nat/linux-ptrace.h
 
 make -j8 && make install
 
-# gdb
-# Allwinner h3_r258
-export PATH=$PATH:/opt/workspace/Allwinner/h3_r258/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf/bin/
-export "CONFIGURE_FLAGS=--host=arm-linux-gnueabihf --build=x86_64-pc-linux-gnu"
-export CC="arm-linux-gnueabihf-gcc"
+make clean
 
+##########################################################################################
+# linaro_arm
+PLATFORM=linaro_arm
+source $sourcePath/linux_crosss_env/environment-setup.linaro_arm.sh
+
+# gdb
 cd $PACKAGE_COMPILE_DIR
 
 wget http://mirrors.ustc.edu.cn/gnu/gmp/gmp-6.0.0a.tar.xz
@@ -109,7 +111,7 @@ wget http://mirrors.ustc.edu.cn/gnu/gmp/gmp-6.0.0a.tar.xz
 tar -xvf gmp-6.0.0a.tar.xz && cd gmp-6.0.0
 
 ./configure $CONFIGURE_FLAGS \
-		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
+		--prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
 		--enable-cxx \
 		--enable-fft
 
@@ -124,8 +126,8 @@ wget http://mirrors.ustc.edu.cn/gnu/mpfr/mpfr-3.1.3.tar.xz
 tar -xvf mpfr-3.1.3.tar.xz && cd mpfr-3.1.3/
 
 ./configure $CONFIGURE_FLAGS \
-		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/gun
+		--prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun
 
 make -j8 && make install
 
@@ -138,9 +140,9 @@ wget http://mirrors.ustc.edu.cn/gnu/mpc/mpc-1.0.3.tar.gz
 tar -xvf mpc-1.0.3.tar.gz && cd mpc-1.0.3/
 
 ./configure $CONFIGURE_FLAGS \
-		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/gun
+		--prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun
 
 make -j8 && make install
 
@@ -153,10 +155,10 @@ wget http://mirrors.ustc.edu.cn/gnu/gdb/gdb-8.0.tar.gz
 tar -xvf gdb-8.0.tar.gz && cd gdb-8.0/
 
 ./configure $CONFIGURE_FLAGS \
-		--prefix=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/gun \
-		--with-mpc=$INSTALL_PREFIX_CROSS_LINUX/gun \
+		--prefix=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-gmp=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-mpfr=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
+		--with-mpc=$INSTALL_PREFIX_CROSS_LINUX/$PLATFORM/gun \
 		--program-suffix=8.0 \
 		--with-gnu-ld \
 		--enable-plugins \
@@ -174,3 +176,7 @@ tar -xvf gdb-8.0.tar.gz && cd gdb-8.0/
 		--localstatedir=$INSTALL_PREFIX_CROSS_LINUX/gun/var
 
 make -j8 && make install
+
+make clean
+
+##########################################################################################
